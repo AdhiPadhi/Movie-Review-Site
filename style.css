@@ -5,6 +5,7 @@
 body{
     margin: 0;
     padding: 0;
+    
 }
 
 
@@ -73,12 +74,15 @@ input{
     border: solid 1.5px #ffca85;
     
 }
-#movie-list{
+.row{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
+
 
 .card{
     width: 240px;
