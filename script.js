@@ -1,4 +1,4 @@
-const APILINK = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=f2befddb4189eaf1a665306d4087af31&page=300';
+const APILINK = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=f2befddb4189eaf1a665306d4087af31&page=1';
 
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'; //root path to every image of movies
 const SEARCHAPI = 'https://api.themoviedb.org/3/search/movie?&api_key=f2befddb4189eaf1a665306d4087af31&query=';
@@ -8,10 +8,11 @@ const form = document.getElementById('form');
 const search = document.getElementById('query');
 
 
-returnMovies(APILINK);
+returnMovies(APILINK); //loads the most popular movies when the page is opened for the first time
 
 function returnMovies(url){
-    fetch(url).then(res => res.json())
+    fetch(url)
+    .then(res => res.json())
     .then(function(data){
         console.log("Total movies received:", data.results.length);
         console.log(data.results);
