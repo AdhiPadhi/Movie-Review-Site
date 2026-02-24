@@ -1,6 +1,30 @@
 {
+  "name": "movie-review-site",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/AdhiPadhi/Movie-Review-Site#readme",
+  "bugs": {
+    "url": "https://github.com/AdhiPadhi/Movie-Review-Site/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdhiPadhi/Movie-Review-Site.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+ 
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
-  }
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mongodb": "^7.1.0"
+  },
+  "devDependencies": {},
+  "keywords": []
 }
