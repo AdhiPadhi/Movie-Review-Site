@@ -4,7 +4,7 @@ import ReviewsDAO from "../dao/reviewsDAO.js"; //importing the ReviewsDAO to use
 export default class ReviewsController { //defining the ReviewsController class that will contain the methods to handle the requests related to reviews, these methods will be called in the routes defined in the reviews.route.js file
     static async apiPostReviews(req, res, next) { //defining a static method to handle the GET request for getting all the reviews for a specific movie, this method will be called in the /movie/:id route defined in the reviews.route.js file
     try{
-        const movieId = req.body.movieId; //getting the movie_id from the request body, this will be used to identify the movie for which the reviews are being added
+        const movieId = parseInt(req.body.movieId); //getting the movie_id from the request body, this will be used to identify the movie for which the reviews are being added
         const review = req.body.review; //getting the review text from the request body, this will be the actual review that is being added for the movie
         const user = req.body.user; //getting the user name from the request body, this will be used to identify the user who is adding the review
 
@@ -21,7 +21,7 @@ export default class ReviewsController { //defining the ReviewsController class 
     static async apiGetReview(req, res, next) { //defining a static method to handle the GET request for getting all the reviews for a specific movie, this method will be called in the /movie/:id route defined in the reviews.route.js file
         try{
             let id = req.params.id || {}; //getting the movie_id from the route parameters, this will be used to identify the movie for which the reviews are being requested
-            let review = await ReviewsDAO.getReviews(id); //calling the getReviews method of the ReviewsDAO to get all the reviews for the specified movie from the database, this method will return an array of reviews
+            let review = await ReviewsDAO.getReview(id); //calling the getReviews method of the ReviewsDAO to get all the reviews for the specified movie from the database, this method will return an array of reviews
             if (!review) { //if there are no reviews for the specified movie, a JSON response with an error message is sent back to the frontend, this will indicate that there are no reviews for the movie
                 res.status(404).json({error: "Not found"});
                 return;

@@ -4,6 +4,7 @@ dotenv.config();
 import mongodb from 'mongodb';
 import app from './server.js';
 import ReviewsDAO from './dao/reviewsDAO.js'; //importing the ReviewsDAO to initialize the database connection before starting the server(data access object for reviews)
+console.log("Running from:", process.cwd());
 
 const MongoClient = mongodb.MongoClient;
 

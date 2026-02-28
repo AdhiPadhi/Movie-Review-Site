@@ -36,7 +36,7 @@ function returnMovies(url){
 
             const center = document.createElement('center');
 
-            title.innerHTML = `${element.title}`;
+            title.innerHTML = `${element.title} <br> <a href="movie.html?id=${element.id}&title=${element.title}">Reviews</a>`; //the title of the movie is displayed along with a link to view the reviews for that movie, the link will take the user to the movie.html page where the reviews for that movie will be displayed
             image.src = IMG_PATH + element.poster_path;
 
             center.appendChild(image);

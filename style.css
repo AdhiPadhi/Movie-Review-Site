@@ -8,7 +8,6 @@ body{
     
 }
 
-
 .topnav{
     display: flex;
     background-color: rgb(255, 132, 0);
@@ -106,4 +105,8 @@ input{
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
     background-color: rgb(255, 132, 0);
     border: solid 2px black;
+}
+
+#section{
+    display:flex;
 }

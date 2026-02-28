@@ -8,6 +8,9 @@ app.use(cors()); //to allow cross-origin requests from the frontend to the backe
 app.use(express.json()); //to parse the incoming JSON data in the request body
 
 app.use("/api/v1/reviews", reviews); //using the reviews route for all requests that start with /api/v1/reviews
+app.post("/test", (req, res) => {
+  res.json({ message: "POST working" });
+});
 
 app.use((req, res) => res.status(404).json({ error: "Not found" })); //for any request that doesn't match the above route, a 404 error is returned
 
