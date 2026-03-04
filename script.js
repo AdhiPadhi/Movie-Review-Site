@@ -7,6 +7,23 @@ const main = document.getElementById('section');
 const form = document.getElementById('form');
 const search = document.getElementById('query');
 
+fetch("http://localhost:8000/auth/user", {
+  credentials: "include"
+})
+.then(res => res.json())
+.then(user => {
+
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if(user){
+      loginBtn.style.display = "none";
+  } else {
+      logoutBtn.style.display = "none";
+  }
+
+});
+
 
 returnMovies(APILINK); //loads the most popular movies when the page is opened for the first time
 

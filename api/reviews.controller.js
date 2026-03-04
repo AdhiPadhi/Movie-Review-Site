@@ -6,7 +6,7 @@ export default class ReviewsController { //defining the ReviewsController class 
     try{
         const movieId = parseInt(req.body.movieId); //getting the movie_id from the request body, this will be used to identify the movie for which the reviews are being added
         const review = req.body.review; //getting the review text from the request body, this will be the actual review that is being added for the movie
-        const user = req.body.user; //getting the user name from the request body, this will be used to identify the user who is adding the review
+        const user = req.user.email; //getting the user name from the request body, this will be used to identify the user who is adding the review, this information is obtained from the authenticated user object that is stored in the session by passport after the user logs in with Google OAuth, this will allow us to associate the review with the user's account and also to implement the functionality to allow only the original poster of a review to edit or delete it
 
         const reviewResponse = await ReviewsDAO.addReview( //calling the addReview method of the ReviewsDAO to add the review to the database, this method will return a response that contains the status of the operation and any error message if there is an error
             movieId,
@@ -37,7 +37,7 @@ export default class ReviewsController { //defining the ReviewsController class 
         try{
             const reviewId = req.params.id; //getting the review ID from the route parameters, this will be used to identify the review that needs to be updated
             const review = req.body.review; //getting the updated review text from the request body, this will be the new review text that will replace the old review text in the database
-            const user = req.body.user; //getting the user name from the request body, this will be used to identify the user who is updating the review
+            const user = req.user.email; //getting the user name from the request body, this will be used to identify the user who is updating the review
 
             const reviewResponse = await ReviewsDAO.updateReview( //calling the updateReview method of the ReviewsDAO to update the review in the database, this method will return a response that contains the status of the operation and any error message if there is an error
                 reviewId,   
@@ -59,8 +59,10 @@ export default class ReviewsController { //defining the ReviewsController class 
         static async apiDeleteReview(req, res, next) { //defining a static method to handle the DELETE request for deleting a specific review by its ID, this method will be called in the /:id route defined in the reviews.route.js file
             try{
                 const reviewId = req.params.id; //getting the review ID from the route parameters, this will be used to identify the review that needs to be deleted
+                const user = req.user.email; //getting the user email from the authenticated user object that is stored in the session by passport after the user logs in with Google OAuth, this will allow us to associate the review with the user's account and also to implement the functionality to allow only the original poster of a review to delete it
             const reviewResponse = await ReviewsDAO.deleteReview( //calling the deleteReview method of the ReviewsDAO to delete the review from the database, this method will return a response that contains the status of the operation and any error message if there is an error
-                reviewId
+                reviewId,
+                user
             );
             res.json({status: "success"}); //if the review was deleted successfully, a JSON response with the status of the operation is sent back to the frontend, this will indicate that the review has been deleted successfully
             } catch(e){

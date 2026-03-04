@@ -41,7 +41,7 @@ export default class ReviewsDAO { //defining a class for the Reviews Data Access
     static async updateReview(reviewId, user, review) { //defining a static method to update a specific review by its ID, this method will be called in the apiUpdateReview method of the ReviewsController class, it takes the review ID, user name, and updated review text as parameters and updates the corresponding review document in the reviews collection in the MongoDB database
         try{
             const updateResponse = await reviews.updateOne( //updating a single review document in the reviews collection that matches the specified review ID and user name, this is done using the updateOne method and passing a query object that matches the _id field with the ObjectID created from the reviewId parameter and the user field with the user parameter, this ensures that only the original poster of the review can update it, the second parameter is an update operator that sets the review field to the new review text, this will return an object that contains information about the update operation, such as the number of documents matched and modified
-                { _id: new ObjectID(reviewId)},
+                { _id: new ObjectID(reviewId), user:user},
                 { $set: { user:user, review: review } }
             );
             return updateResponse; //returning the result of the update operation, this will be used in the apiUpdateReview method to send an appropriate response back to the frontend based on whether the update was successful or if there was an error
@@ -50,9 +50,9 @@ export default class ReviewsDAO { //defining a class for the Reviews Data Access
             console.error(`Unable to update review: ${e}`);
             return { error: e }; //if there is an error while updating the review, an error message is logged to the console for debugging purposes and an object with the error is returned, this will be used in the apiUpdateReview method to send an appropriate response back to the frontend
         };};
-    static async deleteReview(reviewId) { //defining a static method to delete a specific review by its ID, this method will be called in the apiDeleteReview method of the ReviewsController class, it takes the review ID and user name as parameters and deletes the corresponding review document from the reviews collection in the MongoDB database
+    static async deleteReview(reviewId, user) { //defining a static method to delete a specific review by its ID, this method will be called in the apiDeleteReview method of the ReviewsController class, it takes the review ID and user name as parameters and deletes the corresponding review document from the reviews collection in the MongoDB database
         try {
-            const deleteResponse = await reviews.deleteOne({ _id: new ObjectID(reviewId) });
+            const deleteResponse = await reviews.deleteOne({ _id: new ObjectID(reviewId), user:user }); //deleting a single review document from the reviews collection that matches the specified review ID and user name, this is done using the deleteOne method and passing a query object that matches the _id field with the ObjectID created from the reviewId parameter and the user field with the user parameter, this ensures that only the original poster of the review can delete it, this will return an object that contains information about the delete operation, such as the number of documents deleted
             return deleteResponse;
         } catch (e) {
             console.error(`Unable to delete review: ${e}`);
