@@ -10,7 +10,7 @@ const MongoClient = mongodb.MongoClient;
 
 const mongo_username = process.env.db_user;
 const mongo_password = process.env.db_password;
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 const uri = `mongodb+srv://${mongo_username}:${mongo_password}@cluster0.pkby0g8.mongodb.net/?appName=Cluster0` 
 
 

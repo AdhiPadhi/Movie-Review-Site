@@ -2,7 +2,7 @@ const url = new URL(location.href); //creating a new URL object from the current
 const movieId = url.searchParams.get("id"); //getting the value of the "id" query parameter from the URL, this will be used to identify the movie for which the reviews are being requested
 const movieTitle = url.searchParams.get("title"); //getting the value of the "title" query parameter from the URL, this will be used to display the title of the movie on the movie.html page
 
-const APILINK = 'http://localhost:8000/api/v1/reviews/';
+const APILINK = 'https://movie-review-site-production.up.railway.app/api/v1/reviews/';
 
 
 const main = document.getElementById('section');
@@ -10,7 +10,7 @@ const title = document.getElementById('title');
 
 let loggedUser = null;
 
-fetch("http://localhost:8000/auth/user", {
+fetch("https://movie-review-site-production.up.railway.app/auth/user", {
   credentials: "include"
 })
 .then(res => res.json())

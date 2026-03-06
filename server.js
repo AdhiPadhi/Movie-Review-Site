@@ -5,7 +5,7 @@ import reviews from "./api/reviews.route.js"; //importing the reviews route to u
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5500",
+  origin: ["http://localhost:5500","https://adhi-padhi.github.io"],
   credentials: true
 })); //to allow cross-origin requests from the frontend to the backend and to allow cookies to be sent with the requests, this is necessary for the authentication to work properly, as the user information is stored in the session cookie after they log in with Google OAuth, and we need to allow that cookie to be sent with the requests to the backend so that we can identify the user and associate their reviews with their account
 app.use(express.json()); //to parse the incoming JSON data in the request body
@@ -36,13 +36,13 @@ app.get("/auth/google", //defining a route for Google authentication, this route
 app.get("/auth/google/callback", //defining a route for the Google authentication callback, this route will be used to handle the callback from Google after the user has authenticated, when a user successfully logs in with their Google account, they will be redirected back to this route, where we will handle the logic to create or find the user in our database and then log them in, if the authentication is successful, we will redirect the user to the index.html page, if there is an error during authentication, we will redirect them back to the home page
   passport.authenticate("google", { failureRedirect: "/" }),
   (req,res)=>{
-    res.redirect("http://localhost:5500/index.html");
+    res.redirect("https://adhi-padhi.github.io/Movie-Review-Site/index.html");
   }
 );
 
 app.get("/logout", (req,res)=>{
     req.logout(()=>{
-        res.redirect("http://localhost:5500/index.html");
+        res.redirect("https://adhi-padhi.github.io/Movie-Review-Site/index.html");
     });
 }); //defining a route for logging out, this route will be used to log the user out of their session, when a user clicks on the "Logout" button on the frontend, they will be redirected to this route, which will then log them out of their session using the logout method provided by passport, and then redirect them back to the home page
 app.get("/auth/user", (req,res)=>{

@@ -7,7 +7,7 @@ const main = document.getElementById('section');
 const form = document.getElementById('form');
 const search = document.getElementById('query');
 
-fetch("http://localhost:8000/auth/user", {
+fetch("https://movie-review-site-production.up.railway.app/auth/user", {
   credentials: "include"
 })
 .then(res => res.json())
