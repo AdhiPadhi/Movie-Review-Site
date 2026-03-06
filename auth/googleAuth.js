@@ -6,7 +6,7 @@ dotenv.config();
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID, //these values are stored in the .env file and accessed using process.env, this is done to keep the sensitive information like client ID and client secret secure and not hardcoded in the code
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/auth/google/callback" //this is the URL that Google will redirect to after the user has authenticated, this URL should be registered in the Google Developer Console for the OAuth credentials, this is where we will handle the logic to create or find the user in our database and then log them in
+  callbackURL: "https://movie-review-site-production.up.railway.app/auth/google/callback" //this is the URL that Google will redirect to after the user has authenticated, this URL should be registered in the Google Developer Console for the OAuth credentials, this is where we will handle the logic to create or find the user in our database and then log them in
 },
 async (accessToken, refreshToken, profile, done) => { //this is the callback function that will be called after the user has authenticated with Google, it takes the access token, refresh token, user profile, and a done callback as parameters, this is where we will handle the logic to create or find the user in our database and then log them in
 
