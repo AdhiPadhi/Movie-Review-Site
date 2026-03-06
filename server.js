@@ -5,17 +5,21 @@ import reviews from "./api/reviews.route.js"; //importing the reviews route to u
 const app = express();
 
 app.use(cors({
-  origin: ["http://localhost:5500","https://adhipadhi.github.io"],
+  origin: "https://adhipadhi.github.io",
   credentials: true
 })); //to allow cross-origin requests from the frontend to the backend and to allow cookies to be sent with the requests, this is necessary for the authentication to work properly, as the user information is stored in the session cookie after they log in with Google OAuth, and we need to allow that cookie to be sent with the requests to the backend so that we can identify the user and associate their reviews with their account
 app.use(express.json()); //to parse the incoming JSON data in the request body
 
 import session from "express-session";
-
+app.set("trust proxy", 1);
 app.use(session({
   secret: "movie-review-secret",
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false,
+  cookie: {
+    secure: true,
+    sameSite: "none"
+  }
 })); //this will allow us to use sessions in our application, we can use this to store the user information when they log in, and then we can use that information to identify the user when they add a review, this will help us to implement the functionality to allow only the original poster of a review to edit or delete it. here we are using google oauth 
 
 import passport from "passport"; //importing passport to use it for authentication, we will use the Google OAuth strategy for authentication, this will allow users to log in using their Google account, and we can use the user information from their Google profile to identify them in our application and associate their reviews with their account
