@@ -21,10 +21,10 @@ app.use(session({
   saveUninitialized: false,
   proxy: true,
   cookie: {
-    secure: true,        // required for SameSite=None
-    sameSite: "none",    // allow cross-site cookie (github pages → backend)
+    secure: "auto",   // IMPORTANT: works correctly behind Railway proxy
+    sameSite: "none",
     httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+    maxAge: 1000 * 60 * 60 * 24 * 7
   }
 })); //this will allow us to use sessions in our application, we can use this to store the user information when they log in, and then we can use that information to identify the user when they add a review, this will help us to implement the functionality to allow only the original poster of a review to edit or delete it. here we are using google oauth 
 
