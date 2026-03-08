@@ -10,7 +10,7 @@ const title = document.getElementById('title');
 
 let loggedUser = null;
 
-fetch("https://movie-review-site-production.up.railway.app/auth/user", {
+fetch("/auth/user", {
   credentials: "include"
 })
 .then(res => res.json())
