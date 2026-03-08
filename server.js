@@ -11,14 +11,20 @@ app.use(cors({
 app.use(express.json()); //to parse the incoming JSON data in the request body
 
 import session from "express-session";
+
 app.set("trust proxy", 1);
+
 app.use(session({
+  name: "movie-review-session",
   secret: "movie-review-secret",
   resave: false,
   saveUninitialized: false,
+  proxy: true,
   cookie: {
-    secure: true,
-    sameSite: "none"
+    secure: true,        // required for SameSite=None
+    sameSite: "none",    // allow cross-site cookie (github pages → backend)
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
   }
 })); //this will allow us to use sessions in our application, we can use this to store the user information when they log in, and then we can use that information to identify the user when they add a review, this will help us to implement the functionality to allow only the original poster of a review to edit or delete it. here we are using google oauth 
 
